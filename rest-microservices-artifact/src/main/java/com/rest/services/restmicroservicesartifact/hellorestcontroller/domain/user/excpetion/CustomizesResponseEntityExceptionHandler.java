@@ -1,7 +1,9 @@
 package com.rest.services.restmicroservicesartifact.hellorestcontroller.domain.user.excpetion;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,6 +34,16 @@ public class CustomizesResponseEntityExceptionHandler extends
                 ,request.getDescription(false));
 
         return    new ResponseEntity(excpetionResponse, HttpStatus.NOT_FOUND);
+    }
+
+
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+
+
+        ExcpetionResponse excpetionResponse =  new ExcpetionResponse(new Date(),"Lenght Validation Failed"
+                ,ex.getBindingResult().toString());
+
+        return new ResponseEntity(excpetionResponse, HttpStatus.BAD_REQUEST);
     }
 
 }
