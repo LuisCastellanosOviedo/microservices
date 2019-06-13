@@ -6,10 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 // when no ribbon is present @FeignClient(name = "currency-exchange-service",url = "localhost:8000")
-@FeignClient(name = "currency-exchange-service")
+// sin zuul @FeignClient(name = "currency-exchange-service")
+@FeignClient("netflix-zuul-api-gateway-server")
 @RibbonClient(name = "currency-exchange-service")
 public interface CurrencyExchangeServiceProxy {
 
-    @GetMapping("/currency-exchange/from/{from}/to/{to}")
+    //sin zuul @GetMapping("/currency-exchange/from/{from}/to/{to}")
+    @GetMapping("/currency-exchange-service/currency-exchange/from/{from}/to/{to}")
     CurrencyConvertionBean retrieveExchangeValue(@PathVariable("from") String from , @PathVariable("to") String to);
 }
