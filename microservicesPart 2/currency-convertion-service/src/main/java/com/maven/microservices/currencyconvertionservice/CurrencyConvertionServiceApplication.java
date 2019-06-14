@@ -1,9 +1,11 @@
 package com.maven.microservices.currencyconvertionservice;
 
+import brave.sampler.Sampler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 @EnableFeignClients("com.maven.microservices.currencyconvertionservice")
@@ -14,4 +16,8 @@ public class CurrencyConvertionServiceApplication {
 		SpringApplication.run(CurrencyConvertionServiceApplication.class, args);
 	}
 
+	@Bean
+	public Sampler defaultSampler(){
+		return Sampler.ALWAYS_SAMPLE;
+	}
 }
