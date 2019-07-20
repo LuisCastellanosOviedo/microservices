@@ -25,6 +25,6 @@ public class LimitConfigurationController {
     }
 
     public LimitConfiguration fallbackRetrieveConfiguration(){
-        return new LimitConfiguration(97,777);
+        return new LimitConfiguration(97,7377);
     }
 }
